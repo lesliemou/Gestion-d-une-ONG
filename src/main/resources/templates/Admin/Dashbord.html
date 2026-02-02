@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de Bord</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- Navigation -->
+<div th:replace="~{Admin/fragment/navigation :: navbar}"></div>
+
+<!-- Container principal avec sidebar + contenu -->
+<div class="main-container d-flex">
+
+    <!-- Sidebar -->
+    <div th:replace="~{Admin/fragment/sidebar :: sidebar}" class="sidebar" id="sidebar"></div>
+
+    <!-- Contenu principal -->
+    <div class="content container mt-5 pt-4">
+        <h2 class="mb-4 text-center">Tableau de Bord</h2>
+
+        <!-- Résumés -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <h5 class="card-title">Utilisateurs</h5>
+                        <p>Membres actifs : <strong th:text="${membresActifs}">0</strong></p>
+                        <p>Bénévoles disponibles : <strong th:text="${benevolesDisponibles}">0</strong></p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-white bg-info">
+                    <div class="card-body">
+                        <h5 class="card-title">Finances</h5>
+                        <p>Cotisations : <strong th:text="${cotisations} + ' FG'">FG</strong></p>
+                        <p>Dons : <strong th:text="${dons} + ' FG'"></strong></p>
+                        <p>Dépenses : <strong th:text="${depenses} + ' FG'"></strong></p>
+                        <p>Solde : <strong th:text="${solde} + ' FG'"></strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-white bg-danger">
+                    <div class="card-body">
+                        <h5 class="card-title">Cotisations en retard</h5>
+                        <div th:each="adhesion : ${retard}">
+                            <p>
+                                <strong th:text="${adhesion.membre.nom}">Nom</strong> -
+                                <span th:text="${adhesion.montant}">0</span> FG
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projets et Événements -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Projets en cours</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" th:each="projet : ${projetsEnCours}" th:text="${projet.nom}">Projet</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card border-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">Prochain événement</h5>
+                        <p th:if="${prochainEvenement != null}" th:text="${prochainEvenement.description}">Description</p>
+                        <p th:if="${prochainEvenement == null}">Aucun événement à venir</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graphique -->
+        
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>

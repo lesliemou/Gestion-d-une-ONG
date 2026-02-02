@@ -1,0 +1,74 @@
+/* Style général */
+body {
+    background-color: #4CAF50;
+    margin: 0;
+    padding: 0;
+	padding-top: 70px; /* Ajuste selon la hauteur réelle de ta navbar */
+
+}
+
+/* Container principal après navbar */
+.main-container {
+    display: flex;
+    margin-top: 70px; /* Laisse l'espace pour la navbar fixée */
+    padding: 20px;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: fit-content;
+    position: sticky;
+    top: 80px;
+}
+
+#membre {
+	background-color: white;
+
+	
+	
+}
+
+/* Contenu principal */
+.content {
+    margin-left: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    flex: 1;
+}
+
+#membre {
+    background-color: #4CAF50;
+    padding-top: 100px; /* suffisant pour éviter que le contenu soit masqué */
+}
+
+#donateur {
+    background-color: #4CAF50;
+    padding-top: 100px; /* suffisant pour éviter que le contenu soit masqué */
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    #sidebar {
+        width: 100%;
+        position: relative;
+        top: 0;
+        margin-bottom: 1rem;
+    }
+
+    .content {
+        margin-left: 0;
+        width: 100%;
+    }
+}

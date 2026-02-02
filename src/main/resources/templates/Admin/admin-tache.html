@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestion des Tâches</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+    <div th:replace="~{Admin/fragment/navigation :: navbar}"></div>
+<div  class="main-container d-flex">
+	<div th:replace="~{Admin/fragment/sidebar :: sidebar}" class="sidebar" id="sidebar"></div>
+
+	<div class="content container mt-4 pt-4">
+	        <h2 class="mb-3">Liste des Tâches</h2>
+
+	        <table class="table table-striped">
+	            <thead>
+	                <tr>
+	                    <th>ID</th>
+	                    <th>Description</th>  
+	                    <th>Projet</th>  
+	                    <th>Bénévole</th>
+						<th>Date d'echeance</th>
+	                    <th>Statut</th>
+	                    <th>Actions</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr th:each="tache : ${listeTache}">
+	                    <td>[[${tache.id}]]</td>
+	                    <td>[[${tache.description}]]</td>
+	                    <td>[[${tache.projet.nom}]]</td>
+	                    <td>[[${tache.benevole.nom}]]</td>
+						<td>[[${tache.dateEchance}]]</td>
+	                    <td>[[${tache.statutTache}]]</td>
+
+	                    <td>
+	                        <a th:href="@{'/admin/edit-tache/' + ${tache.id}}" class="btn btn-warning btn-sm">Éditer</a>
+	                        <a th:href="@{'/admin/tache/delete/' + ${tache.id}}" class="btn btn-danger btn-sm">Supprimer</a>
+	                    </td>
+	                </tr>
+	            </tbody>
+	        </table>
+
+	        <h3 th:text="${tache != null && tache.id != null} ? 'Modifier Tâche' : 'Ajouter Tâche'"></h3>
+
+	        <form th:action="@{/admin/tache/save}" method="post">
+	            <input type="hidden" name="id" th:if="${tache != null && tache.id != null}" th:value="${tache.id}" />
+
+	            <div class="mb-3">
+	                <label class="form-label">Description</label>
+	                <input type="text" class="form-control" name="description" th:value="${tache != null ? tache.description : ''}" required>
+	            </div>
+				
+				<div class="mb-3">
+					                <label class="form-label">Date </label>
+					                <input type="date" class="form-control" name="dateEchance" th:value="${tache != null ? tache.dateEchance: ''}" required>
+					            </div>
+
+	            <div class="mb-3">
+	                <label class="form-label">Projet</label>
+	                <select class="form-control" name="projet">
+	                    <option th:each="pr : ${listeProjet}" th:value="${pr.id}" th:text="${pr.nom}"
+	                            th:selected="${tache != null and tache.projet != null and pr.id == tache.projet.id}"></option>
+	                </select>
+	            </div>
+
+	            <div class="mb-3">
+	                <label class="form-label">Bénévole</label>
+	                <select class="form-control" name="benevole">
+	                    <option th:each="user : ${listeBenevole}" th:value="${user.id}" th:text="${user.nom}"></option>
+	                </select>
+	            </div>
+
+	            <div class="mb-3">
+	                <label class="form-label">Statut</label>
+	                <select class="form-control" name="statutTache">
+	                    <option th:each="statut : ${Statut_Tache}" th:value="${statut}" th:text="${statut}"
+	                            th:selected="${tache != null and statut == tache.statutTache}"></option>
+	                </select>
+	            </div>
+
+	            <button type="submit" class="btn btn-primary">Enregistrer</button>
+	        </form>
+	    </div>
+	
+</div>
+    
+</body>
+</html>

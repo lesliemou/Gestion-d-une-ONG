@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil Utilisateur</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar (fragment si tu as une barre de navigation) -->
+<div th:replace="~{Admin/fragment/navigation :: navbar}"></div>
+
+<div class="container mt-5 pt-4">
+    <h2 class="text-center mb-4">Mon Profil</h2>
+
+    <!-- Messages de succès ou erreur -->
+    <div th:if="${success}" class="alert alert-success text-center" th:text="${success}"></div>
+    <div th:if="${erreur}" class="alert alert-danger text-center" th:text="${erreur}"></div>
+
+    <!-- Informations de l'utilisateur -->
+    <div class="card shadow-sm p-4 mb-4">
+        <h4>Informations personnelles</h4>
+        <p><strong>Nom :</strong> <span th:text="${utilisateur.nom}"></span></p>
+        <p><strong>Email :</strong> <span th:text="${utilisateur.email}"></span></p>
+    </div>
+
+    <!-- Formulaire de modification de mot de passe -->
+    <div class="card shadow-sm p-4">
+        <h4>Modifier mon mot de passe</h4>
+        <form th:action="@{/profil/modifier-mot-de-passe}" method="post">
+            <div class="mb-3">
+                <label class="form-label">Ancien mot de passe</label>
+                <input type="password" name="ancienMotDePasse" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Nouveau mot de passe</label>
+                <input type="password" name="nouveauMotDePasse" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Mettre à jour le mot de passe</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

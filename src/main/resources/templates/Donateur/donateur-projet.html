@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Projets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body id="donateur">
+
+<!-- Navigation -->
+<div th:replace="~{Donateur/fragment/navigation :: navbar}"></div>
+
+<!-- Container principal avec sidebar + contenu -->
+<div class="main-container d-flex">
+
+    <!-- Sidebar -->
+    <div th:replace="~{Donateur/fragment/sidebar :: sidebar}" class="sidebar" id="sidebar"></div>
+
+    <!-- Contenu principal -->
+    <div class="content container mt-5 pt-4">
+        <h2 class="mb-4 text-center">Liste des Projets</h2>
+
+        <!-- Table de liste des projets -->
+        <div class="card shadow-sm p-4 mb-4">
+            <h4 class="mb-3">Liste des Projets</h4>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Date de début</th>
+                            <th>Date de fin</th>
+                            <th>Montant</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="project : ${listeProjet}">
+                            <td th:text="${project.id}"></td>
+                            <td th:text="${project.nom}"></td>
+                            <td th:text="${project.description}"></td>
+                            <td th:text="${project.date_debut}"></td>
+                            <td th:text="${project.date_fin}"></td>
+                            <td th:text="${project.montant}"></td>
+                            <td th:text="${project.statPro}"></td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>

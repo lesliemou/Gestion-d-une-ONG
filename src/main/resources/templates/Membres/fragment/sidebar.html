@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav id="sidebar" class="bg-dark text-white p-3 vh-100" th:fragment="sidebar">
+    <div class="text-center mb-3">
+        <h4 class="fw-bold">Gestion ONG</h4>
+    </div>
+    
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link text-white" th:href="@{/membre/cotisations}">
+                <i class="bi bi-people"></i> cotisations
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" th:href="@{/membre/projet}">
+                <i class="bi bi-person-check"></i> liste des projet
+            </a>
+        </li>
+        
+       
+    </ul>
+</nav>
+
+</body>
+</html>
